@@ -39,11 +39,11 @@ function validateInput(testInput) {
     
 }
     
-    const launchStatus=document.getElementbyId("launchStatus");
+    //const launchStatus=document.getElementbyId("launchStatus");
 
-    function formSubmission (document, pilot, copilot, fuelLevel, cargoMass) {
-
-        launchStatus.innerHTML += `
+    function formSubmission (document, list, pilot, copilot, fuelLevel, cargoMass) {
+        let launchStatusCheck=document.getElementbyId("launchStatusCheck");
+        launchStatusCheck.innerHTML += `
         <div>
             <ol>
                 `
@@ -67,27 +67,27 @@ function validateInput(testInput) {
 
 
             if (fuelLevel >= 10000) {
-                faultyItems.style.visibility = 'visible';
+                
                     launchStatus.innerHTML = `Shuttle is ready for launch`;
                         launchStatus.style.color = `green`;
                             fuelStatus.innerHTML = `Fuel level high enough for launch`;
 
             }
             if (cargoMass <= 10000) {
-                faultyItems.style.visibility = 'visible';
+            
                     launchStatus.innerHTML = `Shuttle is ready for launch`;
                         launchStatus.style.color = `green`;
                             cargoStatus.innerHTML = `Cargo mass low enough for launch`;
 
             }    
             if (fuelLevel <= 10000){
-                faultyItems.style.visibility = 'visible';
+                list.style.visibility = 'visible';
                     launchStatus.innerHTML = `Shuttle not ready for launch`;
                         launchStatus.style.color = `red`;
                             fuelStatus.innerHTML = `Fuel level too low for launch`;
             }
             if (cargoMass >= 10000) {
-                faultyItems.style.visibility = 'visible';
+                list.style.visibility = 'visible';
                     launchStatus.innerHTML = `Shuttle not ready for launch`;
                         launchStatus.style.color = `red`;
                             cargoStatus.innerHTML = `Cargo mass over capacity for launch`;
