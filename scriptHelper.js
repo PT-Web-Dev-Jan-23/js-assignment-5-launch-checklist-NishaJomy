@@ -8,11 +8,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
     //    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
     //     response.json().then(function (json) {
-         const missionTarget = document.getElementById("missionTarget");
+         let missionTargetDiv = document.getElementById("missionTarget");
     
-                     missionTarget.innerHTML += `
+         missionTargetDiv.innerHTML = 
                          
-                             <h2>Mission Destination</h2>
+                            ` <h2>Mission Destination</h2>
                              <ol>        
                                  <li>Name: ${name}</li>
                                  <li>Diameter: ${diameter}</li>
@@ -20,7 +20,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                                  <li>Distance: ${distance}</li>
                                  <li>Moons: ${moons}</li>
                              </ol>
-                             <img src=${imageUrl}> `;
+                             <img src="${imageUrl}"> `
     
 }
 
@@ -53,12 +53,17 @@ function validateInput(testInput) {
             
            
 
-            if(validateInput(pilot)== "Empty" || validateInput(copilot)== "Empty" || validateInput(fuelLevel)== "Empty" || validateInput(cargoMass)== "Empty"){
-            window.alert("all fields are required");
+        if(validateInput(pilot)=== "Empty" || validateInput(copilot)=== "Empty" || validateInput(fuelLevel)=== "Empty" || validateInput(cargoMass)=== "Empty"){
+            alert("all fields are required");
+            pilotStatus.innerHTML = "Pilot Ready"
+            copilotStatus.innerHTML = "Co-pilot Ready"
+            list.style.visibility = "hidden";
+           
             }
 
-            else if( validateInput(pilot)== "Is a Number" || validateInput(copilot)== "Is a Number" || validateInput(fuelLevel)== "Not a Number" || validateInput(cargoMass)== "Not a Number"){
-            window.alert("enter valid data");
+            else if( validateInput(pilot)=== "Is a Number" || validateInput(copilot)=== "Is a Number" || validateInput(fuelLevel)=== "Not a Number" || validateInput(cargoMass)=== "Not a Number"){
+            alert("enter valid data");
+            
             }
         else{
 
@@ -89,11 +94,11 @@ function validateInput(testInput) {
                                 cargoStatus.innerHTML = 'Cargo mass low enough for launch';
             }   
             else {      
-                    //list.style.visibility = "hidden";
                         launchStatus.innerHTML = 'Shuttle is Ready for Launch';
                             launchStatus.style.color = 'rgb(65, 159, 106)';
                                 fuelStatus.innerHTML = 'Fuel level high enough for launch';
-                                    cargoStatus.innerHTML = 'Cargo mass low enough for launch';                   
+                                    cargoStatus.innerHTML = 'Cargo mass low enough for launch';  
+                                                     
             }  
         }           
 }
@@ -101,12 +106,13 @@ function validateInput(testInput) {
 
 async function myFetch() {
     let planetsReturned;
-    await fetch("https://handlers.education.launchcode.org/static/planets.json")
-    .then( function(response) {response.json()
-    .then(function (planetsReturned) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json")
+    .then( function(response) {return response.json();
+    });
+    
     return planetsReturned;
-    });
-    });
+    
+    
 }
 
 function pickPlanet(planets) {
